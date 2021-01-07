@@ -1,0 +1,19 @@
+version: '3.4'
+
+services:
+  cleancodelabb4:
+    image: ${DOCKER_REGISTRY-}cleancodelabb4
+    build:
+      context: .
+      dockerfile: CleanCodeLabb4/Dockerfile
+    ports:
+      - "5001:80"
+  frontend:
+    image: ${DOCKER_REGISTRY-}frontend
+    volumes:
+      - ./Frontend/static:/usr/share/nginx/html/
+    ports:
+      - "80:80"
+    build: 
+      context: ./Frontend
+      dockerfile: Dockerfile

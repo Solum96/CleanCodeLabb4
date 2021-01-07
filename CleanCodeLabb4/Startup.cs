@@ -28,6 +28,7 @@ namespace CleanCodeLabb4
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors();
             services.AddEntityFrameworkSqlite().AddDbContext<PostContext>();
         }
 
@@ -38,6 +39,13 @@ namespace CleanCodeLabb4
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseCors(builder => builder
+               .AllowAnyHeader()
+               .AllowAnyMethod()
+               .SetIsOriginAllowed((host) => true)
+               .AllowCredentials()
+            );
 
             app.UseHttpsRedirection();
 
